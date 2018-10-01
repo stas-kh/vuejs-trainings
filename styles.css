@@ -1,0 +1,14 @@
+.container .row + .row {
+	margin-top: 20px;
+}
+
+[v-cloak] {
+	display: none;
+}
+
+.modal {
+	display: block;
+}
+.modal-backdrop {
+	background: rgba(0, 0, 0, 0.5);
+}

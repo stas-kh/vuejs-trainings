@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>VueJS project</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container" v-cloak>
+	<div class="row">
+		<div class="col text-center">
+			<h1>
+				{{ player.name }}
+				<span :class="healthClasses(player)">{{ player.health }}</span>
+			</h1>
+			<progress :value="player.health" max="100"></progress>
+		</div>
+		<div class="col text-center">
+			<h1>
+				{{ monster.name }}
+				<span :class="healthClasses(monster)">{{ monster.health }}</span>
+			</h1>
+			<progress :value="monster.health" max="100"></progress>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col text-center">
+			<template v-if="isGameStarted">
+				<button @click="playerHit(2, 22)" type="button" class="btn btn-info">Hit the monster</button>
+				<button @click="playerHit(14, 28)" type="button" class="btn btn-warning">Ultimate hit!</button>
+				<button @click="heal()" type="button" class="btn btn-success">Heal me</button>
+				<button @click="endGame('The player has given up!')" class="btn btn-light">Give up</button>
+			</template>
+
+			<template v-else>
+				<button @click="startNewGame()" class="btn btn-primary">Start New Game</button>
+			</template>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<ul class="text-center list-group list-group-flush">
+				<li v-for="logItem in gameLog" class="list-group-item">{{ logItem }}</li>
+			</ul>
+		</div>
+	</div>
+
+	<div v-if="endGameMessage">
+		<div class="modal modal-backdrop" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Game over!</h5>
+						<button @click="playAgain()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>{{ endGameMessage }}</p>
+					</div>
+					<div class="modal-footer">
+						<button @click="playAgain()" type="button" class="btn btn-primary">Play again</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

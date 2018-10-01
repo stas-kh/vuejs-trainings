@@ -1,18 +1,36 @@
 <!doctype html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport"
 	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>VueJS project</title>
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 
+<nav class="navbar navbar-light bg-light align-middle">
+	<a class="navbar-brand" href="#">
+		<span class="navbar-text">
+			Game store
+		</span>
+	</a>
+</nav>
+
 <div class="container">
-	<input type="text" v-on:input="changeContainerName" />
-	{{ containerName }}
+	<div class="row">
+		<div class="col">
+			<ul class="list-group">
+				<li class="list-group-item pointer"
+				    :class="{ 'active': item.isActive }"
+				    @click="setActive(item)"
+				    v-for="item in getListItems"
+				>{{ item.name }}</li>
+			</ul>
+		</div>
+	</div>
 </div>
 
 <script src="main.js"></script>

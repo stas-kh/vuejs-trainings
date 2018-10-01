@@ -1,13 +1,23 @@
-const vue = new Vue({
+new Vue({
     el: '.container',
     data: {
-        containerName: 'Hello VueJS'
+        listItems: [
+            {name: 'Cras justo odio', isActive: true},
+            {name: 'Dapibus ac facilisis in', isActive: false},
+            {name: 'Morbi leo risus', isActive: false},
+            {name: 'Porta ac consectetur ac', isActive: false},
+            {name: 'Vestibulum at eros', isActive: false}
+        ]
+    },
+    computed: {
+        getListItems() {
+            return this.listItems;
+        }
     },
     methods: {
-        changeContainerName: function({ target }) {
-            this.containerName = target.value;
+        setActive(item) {
+            this.listItems.forEach((i) => i.isActive = false);
+            item.isActive = !item.isActive;
         }
     }
 });
-
-console.log(vue);
